@@ -47,6 +47,7 @@ export default Vue.extend({
         outlined: true,
         hideDetails: "auto",
         rules: this.rules,
+        appendIcon: "mdi-calendar",
         ...this.textFieldProps,
       };
     },

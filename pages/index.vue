@@ -22,17 +22,22 @@
   </v-row>
 </template>
 
-<script>
+<script lang="ts">
+import jokesApi from "~/api/jokes.api";
 import NuxtLogo from "~/components/pages/homepage/NuxtLogo.vue";
 import VuetifyLogo from "~/components/pages/homepage/VuetifyLogo.vue";
-import jokesApi from "~/api/jokes.api";
-export default {
+
+import mixins from "vue-typed-mixins";
+import BarMixin from "../mixins/bar.mixin";
+import FooMixin from "../mixins/foo.mixin";
+
+export default mixins(FooMixin, BarMixin).extend({
   name: "IndexPage",
   components: { NuxtLogo, VuetifyLogo },
 
   data() {
     return {
-      joke: null,
+      joke: null as null | string,
     };
   },
 
@@ -45,5 +50,9 @@ export default {
       this.joke = response.contents.jokes[0].joke.text;
     },
   },
-};
+
+  created() {
+    console.log("easy access multi mixins Data", this.foo, this.bar);
+  },
+});
 </script>
