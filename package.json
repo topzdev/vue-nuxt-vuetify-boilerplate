@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "type:vuetify": "node --experimental-modules --experimental-json-modules ./scripts/vuetify-type.mjs > ./types/vuetify2.d.ts",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@nuxt/types": "^2.15.8",
     "@nuxt/typescript-build": "^2.1.0",
-    "@nuxtjs/vuetify": "^1.12.3"
+    "@nuxtjs/vuetify": "^1.12.3",
+    "@vue/runtime-dom": "^3.2.37"
   }
 }

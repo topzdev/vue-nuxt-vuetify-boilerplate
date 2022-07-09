@@ -14,8 +14,14 @@
           <p class="mt-2" v-html="joke"></p>
         </v-card-text>
         <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
+          <v-btn large :to="pageRoutes.playground.to" color="primary"
+            >To Playground
+            <v-icon right>{{ pageRoutes.playground.icon }}</v-icon></v-btn
+          >
+          <v-btn large @click="gotoSettings" color="primary"
+            >To Settings
+            <v-icon right>{{ pageRoutes.settings.icon }}</v-icon></v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-col>
@@ -30,6 +36,7 @@ import VuetifyLogo from "~/components/pages/homepage/VuetifyLogo.vue";
 import mixins from "vue-typed-mixins";
 import BarMixin from "../mixins/bar.mixin";
 import FooMixin from "../mixins/foo.mixin";
+import pageRoutes from "@/configs/page-route.config";
 
 export default mixins(FooMixin, BarMixin).extend({
   name: "IndexPage",
@@ -38,6 +45,7 @@ export default mixins(FooMixin, BarMixin).extend({
   data() {
     return {
       joke: null as null | string,
+      pageRoutes,
     };
   },
 
@@ -48,6 +56,11 @@ export default mixins(FooMixin, BarMixin).extend({
     async fetchJoke() {
       const response = await jokesApi.getDailyJokes();
       this.joke = response.contents.jokes[0].joke.text;
+    },
+
+    // using page route config on router push
+    gotoSettings() {
+      this.$router.push(this.pageRoutes.settings.to);
     },
   },
 

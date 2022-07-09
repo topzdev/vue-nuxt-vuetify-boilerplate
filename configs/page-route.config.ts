@@ -2,7 +2,7 @@ type PageRoute = {
   title: string;
   route: string;
   icon: string;
-  exactPath?: boolean;
+  exact?: boolean;
 
   subpages?: {
     [key: string]: PageRoute;
@@ -12,11 +12,18 @@ type PageRoutes = {
   [key: string]: PageRoute;
 };
 
-const pageRoutes: PageRoutes = {
+const pageRoutes = {
   index: {
     title: "Dashboard",
-    route: "/",
-    icon: "mdi-home",
+    to: "/",
+    icon: "mdi-apps",
+    exact: true,
+  },
+
+  playground: {
+    title: "Playground",
+    to: "/playground",
+    icon: "mdi-slide",
     exactPath: true,
   },
 
@@ -25,22 +32,26 @@ const pageRoutes: PageRoutes = {
 
     return {
       title: "Settings",
-      route: parentPath,
+      to: `${parentPath}/general`,
       icon: "mdi-cog",
-      exactPath: true,
+      exact: true,
 
       subpages: {
         general: {
           title: "General",
-          route: `${parentPath}/general`,
-          icon: "mdi-house",
+          to: `${parentPath}/general`,
+          icon: "mdi-information-outline",
+          color: "primary",
         },
         account: {
           title: "Account",
-          route: `${parentPath}/general`,
+          to: `${parentPath}/account`,
           icon: "mdi-account",
+          color: "primary",
         },
       },
     };
   })(),
 };
+
+export default pageRoutes;
